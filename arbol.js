@@ -26,15 +26,19 @@ n3.hijos.push(n4);//body contiene a div y 5 botones
 n3.hijos.push(n6,n7,n8,n9,n10);
 n4.hijos.push(n5);//div contiene a canvas
 
-function preOrderTraversalN(node = this.root,i) {
+function preOrderTransversal(node){
+  console.log(node.dato);
+  preOrderTransversalAux(node, 0);
+}
+
+function preOrderTransversalAux(node,i) {
 //el recorrido clasico de preorden no funciona aqui, ya que pueden ser mas de 2 hijos   
-    
     while(node.hijos[i])//mientras tenga hijos que visitar
     {
       console.log(node.hijos[i].dato);//muestralo
-      preOrderTraversalN(node.hijos[i],0);
+      preOrderTransversalAux(node.hijos[i],0);
       i++;
     }
 }
 
-preOrderTraversalN(n0,0);
+preOrderTransversal(n0);
