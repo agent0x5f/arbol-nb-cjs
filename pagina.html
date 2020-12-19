@@ -12,51 +12,44 @@
 	<div style="width:75%">
 		<canvas id="canvas"></canvas>
 	</div>
-	<button id="randomizeData">Randomize Data</button>
+	<button id="addDataset">Add Dataset</button>
 <script>
 	var chart = new Chart(canvas, {
 		type: 'scatter',
 		data: {
-			datasets: [{
-				data: [{
-					x: 1,
-					y: 1
-				}, {
-					x: 3,
-					y: 7
-				}, {
-					x: 6,
-					y: 5
-				}, { // add same data as the first one, to draw the closing line
-					x: 1,
-					y: 1
-				}],
-				borderColor: 'black',
-				borderWidth: 1,
-				pointBackgroundColor: ['#000', '#00bcd6', '#d300d6'],
-				pointBorderColor: ['#000', '#00bcd6', '#d300d6'],
-				pointRadius: 5,
-				pointHoverRadius: 5,
-				fill: false,
-				tension: 0,
-				showLine: true
-			}, {
+			datasets: [ {
 				data: [
-				{x: 5,y: 9},
 				{x: 3,y: 7},
+				{x: 5,y: 9},
 				{x: 7,y: 7},
-				{x: 9,y: 5},
-				{x: 1,y: 5},
-				{x: 2,y: 5},
-				{x: 3,y: 5},
-				{x: 4,y: 5},
-				{x: 5,y: 5},
-				],				 
+				],				
+				borderColor: 'black',
+				borderWidth: 1, 
 				pointBackgroundColor: 'orange',
 				pointBorderColor: 'darkorange',
 				pointRadius: 10,
-				pointHoverRadius: 10
-			}]
+				pointHoverRadius: 10,
+				tension: 0,
+				showLine: true,
+				fill: false
+			},{
+				data: [
+				{x: 9,y: 5},
+				{x: 7,y: 7}
+				],				
+				borderColor: 'black',
+				borderWidth: 1, 
+				pointBackgroundColor: 'orange',
+				pointBorderColor: 'darkorange',
+				pointRadius: 10,
+				pointHoverRadius: 10,
+				tension: 0,
+				showLine: true,
+				fill: false
+			}
+			
+				
+			]
 		},
 		options: {
 			scales: {
@@ -75,6 +68,43 @@
 				}]
 			}
 		}
+		});
+
+
+		var colorNames = Object.keys(window.chartColors);
+		document.getElementById('addDataset').addEventListener('click', function() {
+			var colorName = colorNames[chart.data.datasets.length % colorNames.length];
+			var newColor = window.chartColors[colorName];
+			var newDataset = {
+				label: 'Dataset ' + chart.data.datasets.length,
+				backgroundColor: newColor,
+				borderColor: newColor,
+				data: [
+				{x: 1,y: 5},
+				{x: 2,y: 5},
+				{x: 3,y: 5},
+				{x: 4,y: 5},
+				{x: 5,y: 5},
+				],				
+				borderColor: 'black',
+				borderWidth: 1, 
+				pointBackgroundColor: 'orange',
+				pointBorderColor: 'darkorange',
+				pointRadius: 10,
+				pointHoverRadius: 10,
+				tension: 0,
+				showLine: true,
+				fill: false,
+				fill: false
+			};
+
+			for (var index = 0; index < chart.data.labels.length; ++index) {
+				newDataset.data.push(randomScalingFactor());
+			}
+
+			chart.data.datasets.push(newDataset);
+			
+			chart.update();
 		});
 		
 </script>
