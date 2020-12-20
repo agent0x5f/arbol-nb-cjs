@@ -26,15 +26,25 @@ var custom = Chart.controllers.bubble.extend({
         //AQUI SE HACE LA MAGIA
         // Now we can do some custom drawing for this dataset. Here we'll draw a red box around the first point in each dataset
         var meta = this.getMeta();
-        var pt0 = meta.data[0];
-        var radius = pt0._view.radius;
+		var pt0 = meta.data[0];
+		var pt1 = meta.data[1];
+        var radius = pt0._view.radius;//todos los nodos tienen el mismo tamaño
 
         var ctx = this.chart.chart.ctx;
         ctx.save();
-        ctx.strokeStyle = 'red';
-        ctx.lineWidth = 1;
-        ctx.strokeRect(pt0._view.x - radius, pt0._view.y - radius, 2 * radius, 2 * radius);
-        ctx.restore();
+        ctx.strokeStyle = 'black';
+		ctx.lineWidth = 1;
+		ctx.fillStyle = "black";//con esto repinto el nodo
+		ctx.fillRect(pt0._view.x - radius - 1, pt0._view.y - radius - 1, 2 * radius + 1, 2 * radius + 1);
+		//con esto conecto los 2 nodos
+		ctx.moveTo(pt0._view.x,pt0._view.y);
+		ctx.lineTo(pt1._view.x,pt1._view.y);
+		ctx.stroke();
+		//poniendo el letrero
+		ctx.font = "12px Georgia";
+		ctx.fillStyle = "white";
+		ctx.fillText("M", pt0._view.x, pt0._view.y);
+		ctx.restore();
     }
 });
 
