@@ -29,26 +29,6 @@ var datos = {
             r: 15,
             d:'div'
         }]
-    }, {
-        label: 'My Second dataset',
-        backgroundColor: 'orange',
-        borderColor: window.chartColors.orange,
-        borderWidth: 1,
-        data: [{
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 15,
-            d:'button'
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 15,
-            d:'canvas'
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 15,
-            d:'image'
-        }]
-    }]
+    }
+    ]
 };
