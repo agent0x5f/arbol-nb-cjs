@@ -1,4 +1,3 @@
-
 class Nodo {
     constructor(dato) {
       this.dato = dato;
@@ -40,5 +39,5 @@ function preOrderTransversalAux(node,i) {
       i++;
     }
 }
-
-preOrderTransversal(n0);
+//revisar ahora no funciona por alguna razon que desconozco
+//preOrderTransversal(n0);

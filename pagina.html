@@ -5,112 +5,23 @@
 	<title>Scatter Chart</title>
     <script src="Chart.js"></script>
     <script src="utils.js"></script>
-	<link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="estilo.css">
+    <script src="datos.js"></script>
+    <script src="arbol_chart.js"></script>
+    <script src="arbol.js"></script>
 </head>
 
 <body>
 	<div style="width:75%">
         <canvas id="canvas2"></canvas>
 	</div>
-<script>
-// Sets the default config for 'derivedBubble' to be the same as the bubble defaults.
-// We look for the defaults by doing Chart.defaults[chartType]
-// It looks like a bug exists when the defaults don't exist
-Chart.defaults.arbol = Chart.defaults.bubble;
-
-// I think the recommend using Chart.controllers.bubble.extend({ extensions here });
-var custom = Chart.controllers.bubble.extend({
-    draw: function(ease) {
-        // Call super method first
-        Chart.controllers.bubble.prototype.draw.call(this, ease);
-        //AQUI SE HACE LA MAGIA
-        // Now we can do some custom drawing for this dataset. Here we'll draw a red box around the first point in each dataset
-        var meta = this.getMeta();
-		var pt0 = meta.data[0];
-		var pt1 = meta.data[1];
-        var radius = pt0._view.radius;//todos los nodos tienen el mismo tamaño
-
-        var ctx = this.chart.chart.ctx;
-        ctx.save();
-        ctx.strokeStyle = 'black';
-		ctx.lineWidth = 1;
-		ctx.fillStyle = "black";//con esto repinto el nodo
-		ctx.fillRect(pt0._view.x - radius - 1, pt0._view.y - radius - 1, 2 * radius + 1, 2 * radius + 1);
-		//con esto conecto los 2 nodos
-		ctx.moveTo(pt0._view.x,pt0._view.y);
-		ctx.lineTo(pt1._view.x,pt1._view.y);
-		ctx.stroke();
-		//poniendo el letrero
-		ctx.font = "12px Georgia";
-		ctx.fillStyle = "white";
-		ctx.fillText("M", pt0._view.x, pt0._view.y);
-		ctx.restore();
-    }
-});
-
-// Stores the controller so that the chart initialization routine can look it up with
-// Chart.controllers[type]
-Chart.controllers.arbol = custom;
-
-// Now we can create and use our new chart type
-var datos = {
-    datasets: [{
-        label: 'My First dataset',
-        backgroundColor: 'red',
-        borderColor: window.chartColors.red,
-        borderWidth: 1,
-        data: [{
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 15,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 15,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 15,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 15,
-        }]
-    }, {
-        label: 'My Second dataset',
-        backgroundColor: 'orange',
-        borderColor: window.chartColors.orange,
-        borderWidth: 1,
-        data: [{
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 15,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 15,
-        }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 15,
-        }]
-    }]
-};
+<script>    
 
 new Chart(canvas2, {
     type: 'arbol',
     data: datos,
     options: {
-        responsive: true,
-        plugins: {
-            title: {
-                display: true,
-                text: 'Chart.js Bubble Chart'
-            },
-            tooltip: {
-                mode: 'point'
-            }
-        }
+        responsive: true
     }
 });
 </script>
