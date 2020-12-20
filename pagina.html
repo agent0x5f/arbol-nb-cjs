@@ -94,7 +94,6 @@
 				pointHoverRadius: 10,
 				tension: 0,
 				showLine: true,
-				fill: false,
 				fill: false
 			};
 
@@ -102,8 +101,7 @@
 				newDataset.data.push(randomScalingFactor());
 			}
 
-			chart.data.datasets.push(newDataset);
-			
+			chart.data.datasets.push(newDataset);			
 			chart.update();
 		});
 		
