@@ -9,25 +9,60 @@ var datos = {
         borderColor: window.chartColors.red,
         borderWidth: 1,
         data: [{
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 15,
+            x: 10,
+            y: 50,
+            r: 10,
             d:'HTML'
         }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 15,
+            x: 15,
+            y: 75,
+            r: 10,
             d:'head'
         }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 15,
-            d:'title'
+            x: 15,
+            y: 25,
+            r: 10,
+            d:'body'
         }, {
-            x: randomScalingFactor(),
-            y: randomScalingFactor(),
-            r: 15,
+            x: 20,
+            y: 90,
+            r: 10,
+            d:'title'
+        },{
+            x: 20,
+            y: 60,
+            r: 10,
             d:'div'
+        }, {
+            x: 25,
+            y: 75,
+            r: 10,
+            d:'canvas'
+        }, {
+            x: 20,
+            y: 10,
+            r: 25,
+            d:'b1'
+        }, {
+            x: 20,
+            y: 20,
+            r: 10,
+            d:'b2'
+        }, {
+            x: 20,
+            y: 30,
+            r: 10,
+            d:'b3'
+        }, {
+            x: 20,
+            y: 40,
+            r: 10,
+            d:'b4'
+        }, {
+            x: 20,
+            y: 50,
+            r: 10,
+            d:'b5'
         }]
     }
     ]
