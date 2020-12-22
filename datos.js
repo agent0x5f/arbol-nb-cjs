@@ -8,61 +8,64 @@ var datos = {
         backgroundColor: 'red',
         borderColor: window.chartColors.red,
         borderWidth: 1,
+        treeDescription: 'Hola',
+        edgeColor: 'Green',
         data: [{
             x: 10,
             y: 50,
             r: 10,
-            d:'HTML'
+            label:'HTML',
+            hijos:[1,2]
         }, {
             x: 15,
             y: 75,
             r: 10,
-            d:'head'
+            label:'head'
         }, {
             x: 15,
             y: 25,
             r: 10,
-            d:'body'
+            label:'body'
         }, {
             x: 20,
             y: 90,
             r: 10,
-            d:'title'
+            label:'title'
         },{
             x: 20,
             y: 60,
             r: 10,
-            d:'div'
+            label:'div'
         }, {
             x: 25,
             y: 75,
             r: 10,
-            d:'canvas'
+            label:'canvas'
         }, {
             x: 20,
             y: 10,
             r: 25,
-            d:'b1'
+            label:'b1'
         }, {
             x: 20,
             y: 20,
             r: 10,
-            d:'b2'
+            label:'b2'
         }, {
             x: 20,
             y: 30,
             r: 10,
-            d:'b3'
+            label:'b3'
         }, {
             x: 20,
             y: 40,
             r: 10,
-            d:'b4'
+            label:'b4'
         }, {
             x: 20,
             y: 50,
             r: 10,
-            d:'b5'
+            label:'b5'
         }]
     }
     ]

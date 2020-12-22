@@ -9,6 +9,7 @@ var custom = Chart.controllers.bubble.extend({
         //AQUI SE HACE LA MAGIA
         var meta = this.getMeta();
         var dataset = this.getDataset().data;
+        console.log(this.getDataset().treeDescription);
 		var pt0 = meta.data[0];
         var radius = pt0._view.radius;//todos los nodos tienen el mismo tamaño en la clase default
         var ctx = this.chart.chart.ctx;//obtengo el canvas 
@@ -18,6 +19,11 @@ var custom = Chart.controllers.bubble.extend({
         //primero limpio el canvas
         ctx.fillStyle = "gray";
         ctx.fillRect(0,0,ctx_ancho,ctx_alto);
+        //pinto las ramas
+        ctx.strokeStyle = "green";       
+        dibujaRama(meta.data[0],meta.data[1],ctx);
+        dibujaRama(meta.data[0],meta.data[2],ctx);
+      
         //pinto los nodos
         ctx.fillStyle = "black";
         var e=0;
@@ -27,30 +33,16 @@ var custom = Chart.controllers.bubble.extend({
             var px=meta.data[e]._view.x;
             var py=meta.data[e]._view.y;
             //dibujo los nodos
-            ctx.fillRect(px-radius-margen,py-radius-margen,2*radius+margen,2*radius+margen);
+            ctx.fillRect(px-radius-margen,py-radius-margen,2*radius+margen+50,2*radius+margen);
             ctx.save();
             //rotulo los nodos
-            ctx.font = "8px Georgia";
+            ctx.font = "12px Arial";
     		ctx.fillStyle = "white";
-            ctx.fillText(dataset[e].d,px,py);
+            ctx.fillText(dataset[e].label,px,py);
             ctx.restore();
             e++;
         }
-        ctx.strokeStyle = "green";       
-        dibujaRama(meta.data[0],meta.data[1],ctx);
-        dibujaRama(meta.data[0],meta.data[2],ctx);
-        dibujaRama(meta.data[1],meta.data[3],ctx);
-        dibujaRama(meta.data[2],meta.data[4],ctx);
-        dibujaRama(meta.data[4],meta.data[5],ctx);
-        dibujaRama(meta.data[2],meta.data[6],ctx);
-        dibujaRama(meta.data[2],meta.data[7],ctx);
-        dibujaRama(meta.data[2],meta.data[8],ctx);
-        dibujaRama(meta.data[2],meta.data[9],ctx);
-        dibujaRama(meta.data[2],meta.data[10],ctx);
-
-
-        
-
+       
 		ctx.restore();
     }
 });
