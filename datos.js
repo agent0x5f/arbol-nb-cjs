@@ -5,11 +5,11 @@
 var datos = {
    datasets: [{
         label: 'My First dataset',
-        backgroundColor: 'red',
+        backgroundColor: 'grey',
         borderColor: window.chartColors.red,
         borderWidth: 1,
         treeDescription: 'Hola',
-        edgeColor: 'Green',
+        edgeColor: 'blue',
         data: [{
             x: 10,
             y: 50,
@@ -20,52 +20,62 @@ var datos = {
             x: 15,
             y: 75,
             r: 10,
-            label:'head'
+            label:'head',
+            hijos:[3]
         }, {
             x: 15,
             y: 25,
             r: 10,
-            label:'body'
+            label:'body',
+            hijos:[4,6,7,8,9,10]
         }, {
             x: 20,
             y: 90,
             r: 10,
-            label:'title'
+            label:'title',
+            hijos:[]
         },{
             x: 20,
             y: 60,
             r: 10,
-            label:'div'
+            label:'div',
+            hijos:[5]
         }, {
             x: 25,
             y: 75,
             r: 10,
-            label:'canvas'
+            label:'canvas',
+            hijos:[]
         }, {
             x: 20,
             y: 10,
             r: 25,
-            label:'b1'
+            label:'b1',
+            hijos:[]
         }, {
             x: 20,
             y: 20,
             r: 10,
-            label:'b2'
+            label:'b2',
+            hijos:[]
         }, {
             x: 20,
             y: 30,
             r: 10,
-            label:'b3'
+            label:'b3',
+            hijos:[]
         }, {
             x: 20,
             y: 40,
             r: 10,
-            label:'b4'
+            label:'b4',
+            hijos:[]
         }, {
             x: 20,
             y: 50,
             r: 10,
-            label:'b5'
+            label:'b5',
+            hijos:[]
         }]
     }
     ]

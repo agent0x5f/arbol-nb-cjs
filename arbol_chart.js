@@ -9,7 +9,7 @@ var custom = Chart.controllers.bubble.extend({
         //AQUI SE HACE LA MAGIA
         var meta = this.getMeta();
         var dataset = this.getDataset().data;
-        console.log(this.getDataset().treeDescription);
+        //console.log(this.getDataset().treeDescription);
 		var pt0 = meta.data[0];
         var radius = pt0._view.radius;//todos los nodos tienen el mismo tamaño en la clase default
         var ctx = this.chart.chart.ctx;//obtengo el canvas 
@@ -17,13 +17,26 @@ var custom = Chart.controllers.bubble.extend({
         var ctx_alto = ctx.canvas.clientHeight;
         ctx.save();
         //primero limpio el canvas
-        ctx.fillStyle = "gray";
+        ctx.fillStyle = this.getDataset().backgroundColor;
         ctx.fillRect(0,0,ctx_ancho,ctx_alto);
         //pinto las ramas
-        ctx.strokeStyle = "green";       
-        dibujaRama(meta.data[0],meta.data[1],ctx);
-        dibujaRama(meta.data[0],meta.data[2],ctx);
-      
+        ctx.strokeStyle = this.getDataset().edgeColor;    
+        var k=0;
+        var t=0;  
+        while(t<dataset.length)
+        {
+            while(dataset[t].hijos[k]!=undefined)
+            {
+                var pos_final = meta.data[dataset[t].hijos[k]];  
+                if(dataset[t].hijos.length!=0)
+                // console.log('dibujando de',dataset[t].label);
+                dibujaRama(meta.data[t],pos_final,ctx);
+                k++;
+            }
+        k=0;
+        t++;      
+        }
+        
         //pinto los nodos
         ctx.fillStyle = "black";
         var e=0;
