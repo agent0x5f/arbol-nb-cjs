@@ -1,7 +1,8 @@
 // Datos que tendrá el arbol
 // Puedo agregar datos a data: y luego manejarlo desde la zona de dibujado
 //X y Y debo de calcularlo primero, hacer funciones que se encargen de eso y generen data: automat.
-
+//X y Y las toma el graficador y realiza la escala dinamicamente
+//inserte un nodo en 100,100 para observar el comportamiento :D
 var datos = {
    datasets: [{
         label: 'My First dataset',
