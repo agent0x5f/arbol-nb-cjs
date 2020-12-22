@@ -34,10 +34,31 @@ function preOrderTransversalAux(node,i) {
 //el recorrido clasico de preorden no funciona aqui, ya que pueden ser mas de 2 hijos   
     while(node.hijos[i])//mientras tenga hijos que visitar
     {
-      console.log(node.hijos[i].dato);//muestralo
+      //console.log(node.hijos[i].dato);//muestralo
       preOrderTransversalAux(node.hijos[i],0);
       i++;
     }
 }
-//revisar ahora no funciona por alguna razon que desconozco
 //preOrderTransversal(n0);
+
+//calcula la profundidad del arbol
+function treeDepth(node) {
+  if (node == undefined) {
+      return (-1); // an empty tree  has height −1
+  } else {
+      // compute the depth of each subtree
+      var j=0;
+      var deep=0;
+      while(node.hijos[j])//mientras tenga hijos que visitar
+      {
+        var actualdeep = treeDepth(node.hijos[j]);
+       
+        if(actualdeep > deep)
+          deep = actualdeep;
+    
+        j++;
+      } 
+      return deep + 1;
+  }
+}
+//console.log('Altura del arbol=',treeDepth(n0));

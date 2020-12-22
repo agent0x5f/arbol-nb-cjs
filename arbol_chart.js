@@ -11,7 +11,6 @@ var custom = Chart.controllers.bubble.extend({
         var info = this.getDataset().data[0].d;//cambiar a funcion
 		var pt0 = meta.data[0];
         var pt1 = meta.data[1];
-        var pt2 = meta.data[2];
         var radius = pt0._view.radius;//todos los nodos tienen el mismo tamaño
 
         var ctx = this.chart.chart.ctx;
