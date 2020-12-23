@@ -62,3 +62,14 @@ function treeDepth(node) {
   }
 }
 //console.log('Altura del arbol=',treeDepth(n0));
+function loadTree(dat){
+  console.log(dat[0]);
+}
+
+document.getElementById('inputfile') .addEventListener('change', function() { 
+    var fr=new FileReader(); 
+    fr.onload=function(){ 
+        loadTree(fr.result);//llamamos al cargador del arbol pasandole el texto 
+    }       
+    fr.readAsText(this.files[0]); 
+}) 
