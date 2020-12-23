@@ -63,7 +63,23 @@ function treeDepth(node) {
 }
 //console.log('Altura del arbol=',treeDepth(n0));
 function loadTree(dat){
-  console.log(dat[0]);
+  //como dat es un string con todo el contenido del archivo dot
+  //primero quito todo hasta que encuentre la palabra "digraph" que marca el inicio dela estructura
+  //encuentro las d's las cuales marcan los inicios de donde estaria la palabra
+  //ya que estamos en js, buscamos si esta la palabra directamente
+  var inicio=dat.indexOf('digraph')
+  if(inicio!=-1)
+  {
+    var ndat=dat.slice(inicio);
+   
+    for(var x=0;x<30;x++)
+    {
+      console.log(ndat[x]);
+      if(ndat[x]=='\n')
+      alert('salto en '+ x);
+    }
+  } 
+  //console.log(dat);
 }
 
 document.getElementById('inputfile') .addEventListener('change', function() { 
@@ -73,3 +89,4 @@ document.getElementById('inputfile') .addEventListener('change', function() {
     }       
     fr.readAsText(this.files[0]); 
 }) 
+
