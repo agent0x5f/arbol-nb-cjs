@@ -10,20 +10,19 @@ revisar la documentacion del GV para implementar mas funciones
 por ahora are el archivo minimo posible que pueda mostrar al arbol que quiero
 las flechas tienen cabeza, implementar en el grarficador
 
-digraph {
-rankdir = LR
-edge [color=blue]
-node [style=filled,shape=rectangle,color=black,fontcolor=white]
+digraph{
+rankdir=LR
+edge[color=blue]
+node[style=filled,shape=rectangle,color=black,fontcolor=white]
 bgcolor=webgray
-
-HTML -> head; 
-HTML -> body; 
-head -> title; 
-body -> div; 
-div -> canvas; 
-body -> b5; 
-body -> b4; 
-body -> b3; 
-body -> b2;
-body -> b1; 
+HTML->head; 
+HTML->body; 
+head->title; 
+body->div; 
+div->canvas; 
+body->b5; 
+body->b4; 
+body->b3; 
+body->b2;
+body->b1; 
 }

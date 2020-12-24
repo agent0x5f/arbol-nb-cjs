@@ -63,6 +63,18 @@ function treeDepth(node) {
 }
 //console.log('Altura del arbol=',treeDepth(n0));
 function loadTree(dat){
+  var datos = {
+    datasets: [{
+         label: 'My First dataset',
+         backgroundColor: 'white',
+         borderColor: window.chartColors.red,
+         borderWidth: 1,
+         treeDescription: 'Ejemplo',
+         edgeColor: 'red',
+         data: []
+     }
+     ]
+ };
   //como dat es un string con todo el contenido del archivo dot
   //primero quito todo hasta que encuentre la palabra "digraph" que marca el inicio dela estructura
   //encuentro las d's las cuales marcan los inicios de donde estaria la palabra
@@ -70,16 +82,32 @@ function loadTree(dat){
   var inicio=dat.indexOf('digraph')
   if(inicio!=-1)
   {
-    var ndat=dat.slice(inicio);
-   
-    for(var x=0;x<30;x++)
+    var ndat=dat.slice(inicio);//quito lo anterior a digraph
+
+    var linea=(ndat.split('\n'));//separo el doc en lineas
+    var restantes=linea.length;//numero de lineas restantes del doc
+
+    for(var e=0;e<restantes;e++)
     {
-      console.log(ndat[x]);
-      if(ndat[x]=='\n')
-      alert('salto en '+ x);
-    }
+      if(linea[e].indexOf('rankdir')!=-1)
+        if(linea[e][8]+linea[e][9] =='LR')
+          var rankdir='LR';//implementar en graficador
+      //todo: dinamizar la lectura del color especifico
+      if(linea[e].indexOf('edge')!=-1)
+          if(linea[e][5]+linea[e][6]+linea[e][7]+linea[e][8]+linea[e][9] =='color')
+          var edge='blue'
+      //todo:node
+
+      if(linea[e].indexOf('bgcolor')!=-1)
+          var bgcol=linea[e][8]+linea[e][9]+linea[e][10]+linea[e][11]+linea[e][12]+linea[e][13]+linea[e][14];
+    //aqui terminan las opciones generales ahora vienen los nodos
+    //formato es: nodoA->nodoB
+    //alert('nodoA->nodoB'.split('->'));
+   }
+    
+   
   } 
-  //console.log(dat);
+  return arboldat;
 }
 
 document.getElementById('inputfile') .addEventListener('change', function() { 
