@@ -67,6 +67,8 @@ function treeDepth(node) {
 //dat es el archivo dot cargado
 //retorna un objeto con la estructura de datos.js
 function loadTree(dat){
+  
+
   //Defaults de mi clase arbol
   var mylabel='Arbol';
   var mybgcolor='white';
@@ -124,11 +126,39 @@ function loadTree(dat){
   return datos;
 }
 
+   
+var reader = new XMLHttpRequest();
+var info=datos;
+var grafica1 = new Chart(canvas2, {
+  type: 'arbol',
+  data: info,
+  options: {
+      responsive: true
+  }
+  });
+
+function loadFile() {
+    reader.open('get', 'notas.txt', true); 
+    reader.onreadystatechange = displayContents;
+    reader.send(null);
+}
+
+function displayContents() {
+    if(reader.readyState==4) {
+  //var info=loadTree(reader.responseText);
+  console.log(reader.responseText);
+    }
+}
+
+function cambio(){
+    grafica1.config.data = datos2;
+    grafica1.update();
+}
 
 
 //limpia el canvas
 document.getElementById('limpiar').addEventListener('click', function () {
-  info.datasets.pop();
-  grafica1.update();
+  
+  grafica1.clear();
 })   
 

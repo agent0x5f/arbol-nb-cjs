@@ -16,39 +16,15 @@
 	<div style="width:75%">
         <canvas id="canvas2"></canvas>
 	</div>
-<script>    
-    
-var info=datos;
-var grafica1 = new Chart(canvas2, {
-    type: 'arbol',
-    data: info,
-    options: {
-        responsive: true
-    }
-});
 
-
-var reader = new XMLHttpRequest();
-function loadFile() {
-    reader.open('get', 'notas.txt', true); 
-    reader.onreadystatechange = displayContents;
-    reader.send(null);
-}
-
-function displayContents() {
-    if(reader.readyState==4) {
-        console.log(reader.responseText);
-    }
-}
-
-</script>
 <div> 
     <div id="container">
-        <input type="button" value="Cargar"  onclick="loadFile()" />
+        <input type="button" value="Cargar notas.txt"  onclick="loadFile()" />
         <div id="main">
         </div>
     </div>
     <button id="limpiar">Limpiar</button>
+    <input type="button" value="testcambio"  onclick="cambio()" />
 </div> 
 
 </body>
