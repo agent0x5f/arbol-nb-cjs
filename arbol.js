@@ -62,19 +62,21 @@ function treeDepth(node) {
   }
 }
 //console.log('Altura del arbol=',treeDepth(n0));
+
+
+//dat es el archivo dot cargado
+//retorna un objeto con la estructura de datos.js
 function loadTree(dat){
-  var datos = {
-    datasets: [{
-         label: 'My First dataset',
-         backgroundColor: 'white',
-         borderColor: window.chartColors.red,
-         borderWidth: 1,
-         treeDescription: 'Ejemplo',
-         edgeColor: 'red',
-         data: []
-     }
-     ]
- };
+  //Defaults de mi clase arbol
+  var mylabel='Arbol';
+  var mybgcolor='white';
+  var myrankdir='LR';
+  var myedgecolor='red';
+  var mybordercolor='green';
+  var myborderwidth='1';
+  var mydescription='Ejemplo';
+  var mydata=datos;
+
   //como dat es un string con todo el contenido del archivo dot
   //primero quito todo hasta que encuentre la palabra "digraph" que marca el inicio dela estructura
   //encuentro las d's las cuales marcan los inicios de donde estaria la palabra
@@ -91,30 +93,51 @@ function loadTree(dat){
     {
       if(linea[e].indexOf('rankdir')!=-1)
         if(linea[e][8]+linea[e][9] =='LR')
-          var rankdir='LR';//implementar en graficador
+          myrankdir='LR';//implementar en graficador
       //todo: dinamizar la lectura del color especifico
       if(linea[e].indexOf('edge')!=-1)
           if(linea[e][5]+linea[e][6]+linea[e][7]+linea[e][8]+linea[e][9] =='color')
-          var edge='blue'
+            myedgecolor='blue'
       //todo:node
 
       if(linea[e].indexOf('bgcolor')!=-1)
-          var bgcol=linea[e][8]+linea[e][9]+linea[e][10]+linea[e][11]+linea[e][12]+linea[e][13]+linea[e][14];
+        mybgcolor=linea[e][8]+linea[e][9]+linea[e][10]+linea[e][11]+linea[e][12]+linea[e][13]+linea[e][14];
     //aqui terminan las opciones generales ahora vienen los nodos
     //formato es: nodoA->nodoB
     //alert('nodoA->nodoB'.split('->'));
    }
-    
-   
   } 
-  return arboldat;
+
+  var misdatos = {
+    datasets: [{
+         label: mylabel,
+         backgroundColor: mybgcolor,
+         borderColor: mybordercolor,
+         borderWidth: myborderwidth,
+         treeDescription: mydescription,
+         edgeColor: myedgecolor,
+         data: mydata
+     }
+     ]
+ };
+
+  return datos;
 }
 
-document.getElementById('inputfile') .addEventListener('change', function() { 
+//cargador del archivo
+var entrada;
+document.getElementById('inputfile').addEventListener('change', function() { 
     var fr=new FileReader(); 
     fr.onload=function(){ 
-        loadTree(fr.result);//llamamos al cargador del arbol pasandole el texto 
+      entrada=fr.result;
+        loadTree(entrada);//llamamos al cargador del arbol pasandole el texto 
     }       
     fr.readAsText(this.files[0]); 
-}) 
+})
+
+//limpia el canvas
+document.getElementById('limpiar').addEventListener('click', function () {
+  info.datasets.pop();
+  grafica1.update();
+})   
 

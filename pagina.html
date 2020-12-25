@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="estilo.css">
     <script src="datos.js"></script>
     <script src="arbol_chart.js"></script>
+    <script src="arbol.js" defer></script>
     
 </head>
 
@@ -16,6 +17,7 @@
         <canvas id="canvas2"></canvas>
 	</div>
 <script>    
+    
 var info=datos;
 var grafica1 = new Chart(canvas2, {
     type: 'arbol',
@@ -28,15 +30,7 @@ var grafica1 = new Chart(canvas2, {
 <div> 
     <input type="file" name="inputfile" id="inputfile"> 
     <button id="limpiar">Limpiar</button>
-
-<script>
-document.getElementById('limpiar').addEventListener('click', function () {
-    info.datasets.pop();
-    grafica1.update();
-})
-</script>
 </div> 
-<script src="arbol.js"></script>
 
 </body>
 </html>
