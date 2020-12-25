@@ -26,9 +26,28 @@ var grafica1 = new Chart(canvas2, {
         responsive: true
     }
 });
+
+
+var reader = new XMLHttpRequest();
+function loadFile() {
+    reader.open('get', 'notas.txt', true); 
+    reader.onreadystatechange = displayContents;
+    reader.send(null);
+}
+
+function displayContents() {
+    if(reader.readyState==4) {
+        console.log(reader.responseText);
+    }
+}
+
 </script>
 <div> 
-    <input type="file" name="inputfile" id="inputfile"> 
+    <div id="container">
+        <input type="button" value="Cargar"  onclick="loadFile()" />
+        <div id="main">
+        </div>
+    </div>
     <button id="limpiar">Limpiar</button>
 </div> 
 

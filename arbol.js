@@ -124,16 +124,7 @@ function loadTree(dat){
   return datos;
 }
 
-//cargador del archivo
-var entrada;
-document.getElementById('inputfile').addEventListener('change', function() { 
-    var fr=new FileReader(); 
-    fr.onload=function(){ 
-      entrada=fr.result;
-        loadTree(entrada);//llamamos al cargador del arbol pasandole el texto 
-    }       
-    fr.readAsText(this.files[0]); 
-})
+
 
 //limpia el canvas
 document.getElementById('limpiar').addEventListener('click', function () {
