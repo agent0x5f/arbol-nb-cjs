@@ -151,7 +151,15 @@ function displayContents() {
 }
 
 function cambio(){
+   //alert(grafica1);
+   // console.log(grafica1.config.data.datasets[0].data);
+   // alert(datos2.datasets[0].data.pop());
+ //  alert(grafica1.config.data.datasets[0].data.pop());
+  
     grafica1.config.data = datos2;
+//cuando cambie los datos, debo tener en cuenta a los hijos en caso de cambiarlos
+//por que a la hora de graficar las lineas, necesito la referencia del hijo
+//y si no esta, lanzara un error de __view super obscuro!!!
     grafica1.update();
 }
 

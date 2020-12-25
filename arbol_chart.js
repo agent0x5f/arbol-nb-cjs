@@ -57,7 +57,8 @@ var custom = Chart.controllers.bubble.extend({
         }
        
 		ctx.restore();
-    }
+    },
+    
 });
 //a y b son 2 puntos, el padre y su hijo
 function dibujaRama(A,B,ctx){

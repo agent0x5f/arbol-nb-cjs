@@ -113,7 +113,7 @@ var datos2 = {
              y: 25,
              r: 10,
              label:'body',
-             hijos:[4,6,7,8,9,10]
+             hijos:[4,6,7,8,9]
          }, {
              x: 20,
              y: 90,
@@ -124,8 +124,8 @@ var datos2 = {
              x: 20,
              y: 60,
              r: 10,
-             label:'div',
-             hijos:[5]
+             label:'CAMBIO',
+             hijos:[5,0]
          }, {
              x: 25,
              y: 75,
@@ -155,12 +155,6 @@ var datos2 = {
              y: 40,
              r: 10,
              label:'b4',
-             hijos:[]
-         }, {
-             x: 20,
-             y: 50,
-             r: 10,
-             label:'b5',
              hijos:[]
          }]
      }
