@@ -16,10 +16,10 @@
         <canvas id="canvas2"></canvas>
 	</div>
 <script>    
-
-new Chart(canvas2, {
+var info=datos;
+var grafica1 = new Chart(canvas2, {
     type: 'arbol',
-    data: datos,
+    data: info,
     options: {
         responsive: true
     }
@@ -27,8 +27,16 @@ new Chart(canvas2, {
 </script>
 <div> 
     <input type="file" name="inputfile" id="inputfile"> 
-   
+    <button id="limpiar">Limpiar</button>
+
+<script>
+document.getElementById('limpiar').addEventListener('click', function () {
+    info.datasets.pop();
+    grafica1.update();
+})
+</script>
 </div> 
 <script src="arbol.js"></script>
+
 </body>
 </html>
