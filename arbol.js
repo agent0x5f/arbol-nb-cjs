@@ -77,8 +77,8 @@ function loadTree(dat){
   var mybordercolor='green';
   var myborderwidth='1';
   var mydescription='Ejemplo';
-  var mydata=datos;
-
+  var mydata=datos2.datasets[0].data;//hacer la funcion que genere los nodos
+  
   //como dat es un string con todo el contenido del archivo dot
   //primero quito todo hasta que encuentre la palabra "digraph" que marca el inicio dela estructura
   //encuentro las d's las cuales marcan los inicios de donde estaria la palabra
@@ -123,7 +123,7 @@ function loadTree(dat){
      ]
  };
 
-  return datos;
+  return misdatos;
 }
 
    
@@ -146,7 +146,9 @@ function loadFile() {
 function displayContents() {
     if(reader.readyState==4) {
   //var info=loadTree(reader.responseText);
-  console.log(reader.responseText);
+ // console.log(reader.responseText);
+ grafica1.config.data = loadTree(reader.responseText);
+  grafica1.update();
     }
 }
 
