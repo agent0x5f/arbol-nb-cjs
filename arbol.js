@@ -64,6 +64,88 @@ function treeDepth(node) {
 //console.log('Altura del arbol=',treeDepth(n0));
 
 
+function convetirNodos(dat){
+  var nodos_convetidos=[];
+  
+  var inicio=dat.indexOf('bgcolor')
+  var ndat=dat.slice(inicio);//quito lo anterior a bgcolor
+  var linea=(ndat.split('\n'));//separo el doc en lineas
+  var restantes=linea.length;//numero de lineas restantes del doc
+
+  //console.log(ndat);
+  datos.datasets[0].data.push(322);
+  console.log(datos.datasets[0].data);
+
+  //nodos contiene a todos los nodos del arbol, aun no tienen hijos
+  var nodos=[];
+  var lin=[];
+  var izq=[];
+  var der=[];
+  for(var e=1;e<restantes;e++)
+    {
+      if(linea[e].indexOf('}')==-1)
+      {
+        //separo
+        var a = linea[e].split('->');
+        lin.push(a);
+        //console.log(a);
+        nodos.push(a[0]);
+        nodos.push(a[1]);
+        
+        izq.push(a[0]);
+        der.push(a[1]);
+      }
+    }
+   // console.log(lin);
+    for(var d=0;d<nodos.length;d++)
+    {
+      if(nodos[d].indexOf(';')!=-1)
+       nodos[d]=nodos[d].slice(0,nodos[d].length-2)
+    }//ahora tengo en nodos, los nodos sin ';'
+
+    for(var d=0;d<der.length;d++)
+    {
+      if(der[d].indexOf(';')!=-1)
+       der[d]=der[d].slice(0,der[d].length-2)
+    }//ahora tengo en nodos, los nodos sin ';'
+
+    //en unique estan los nodos sin repetir
+    var unique = nodos.filter((v, i, a) => nodos.indexOf(v) === i);
+    var izqunique = izq.filter((v, i, a) => izq.indexOf(v) === i);
+   // console.log(izqunique);
+   // console.log(der);
+    
+    //asignando los hijos
+    //para cada uno en la lista izq unica, si aparece en izq agregarle como hijo su der 
+    
+  //para cada uno en la lista izq unica
+    for(var j=0;j<izqunique.length;j++)
+    {
+      var temp=[{
+        x: 0,
+        y: 0,
+        r: 10,
+        label:izqunique[j],
+        hijos:[]
+    }];
+      //si aparece en izq 
+      for(var k=0;k<izq.length;k++)
+      {//agregarle como hijo su der
+        if(izqunique[j]==izq[k])
+        {  
+         temp[0].hijos.push(der[k]);
+         console.log(temp[0].hijos);
+        }
+      }
+      nodos_convetidos.push(temp); 
+    }
+  
+
+
+console.log(nodos_convetidos[0]);
+return nodos_convetidos;
+}
+
 //dat es el archivo dot cargado
 //retorna un objeto con la estructura de datos.js
 function loadTree(dat){
@@ -77,6 +159,7 @@ function loadTree(dat){
   var mybordercolor='green';
   var myborderwidth='1';
   var mydescription='Ejemplo';
+ 
   var mydata=datos2.datasets[0].data;//hacer la funcion que genere los nodos
   
   //como dat es un string con todo el contenido del archivo dot
@@ -87,7 +170,7 @@ function loadTree(dat){
   if(inicio!=-1)
   {
     var ndat=dat.slice(inicio);//quito lo anterior a digraph
-
+    convetirNodos(ndat);
     var linea=(ndat.split('\n'));//separo el doc en lineas
     var restantes=linea.length;//numero de lineas restantes del doc
 
