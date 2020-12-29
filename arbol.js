@@ -73,8 +73,6 @@ function convetirNodos(dat){
   var restantes=linea.length;//numero de lineas restantes del doc
 
   //console.log(ndat);
-  datos.datasets[0].data.push(322);
-  console.log(datos.datasets[0].data);
 
   //nodos contiene a todos los nodos del arbol, aun no tienen hijos
   var nodos=[];
@@ -118,31 +116,31 @@ function convetirNodos(dat){
     //asignando los hijos
     //para cada uno en la lista izq unica, si aparece en izq agregarle como hijo su der 
     
-  //para cada uno en la lista izq unica
-    for(var j=0;j<izqunique.length;j++)
+  //para cada uno en la lista unica
+
+    for(var j=0;j<unique.length;j++)
     {
       var temp=[{
-        x: 0,
-        y: 0,
+        x: 20,
+        y: 30,
         r: 10,
-        label:izqunique[j],
+        label:unique[j],
         hijos:[]
     }];
-      //si aparece en izq 
-      for(var k=0;k<izq.length;k++)
-      {//agregarle como hijo su der
-        if(izqunique[j]==izq[k])
-        {  
-         temp[0].hijos.push(der[k]);
-         console.log(temp[0].hijos);
-        }
+  
+      //cada vez que aparece en la lista izq, agrego como su hijo der
+      for(var g=0;g<izq.length;g++)
+      {
+        if(izqunique[j]==izq[g])
+          temp[0].hijos.push(der[g]);        
       }
-      nodos_convetidos.push(temp); 
+
+      //agrego el nodo a la lista final
+      nodos_convetidos.push(temp);
     }
   
-
-
-console.log(nodos_convetidos[0]);
+console.log("nuevo arbol");
+console.log(nodos_convetidos);
 return nodos_convetidos;
 }
 
@@ -160,8 +158,10 @@ function loadTree(dat){
   var myborderwidth='1';
   var mydescription='Ejemplo';
  
-  var mydata=datos2.datasets[0].data;//hacer la funcion que genere los nodos
-  
+  //var mydata=datos2.datasets[0].data;
+  var mydata=convetirNodos(dat);
+  console.log("datos originales");
+  console.log(mydata);
   //como dat es un string con todo el contenido del archivo dot
   //primero quito todo hasta que encuentre la palabra "digraph" que marca el inicio dela estructura
   //encuentro las d's las cuales marcan los inicios de donde estaria la palabra
@@ -170,7 +170,7 @@ function loadTree(dat){
   if(inicio!=-1)
   {
     var ndat=dat.slice(inicio);//quito lo anterior a digraph
-    convetirNodos(ndat);
+    grafica1.config.data = datos2; 
     var linea=(ndat.split('\n'));//separo el doc en lineas
     var restantes=linea.length;//numero de lineas restantes del doc
 
