@@ -66,7 +66,7 @@ function treeDepth(node) {
 
 function convetirNodos(dat){
   var nodos_convetidos=[];
-  
+
   var inicio=dat.indexOf('bgcolor')
   var ndat=dat.slice(inicio);//quito lo anterior a bgcolor
   var linea=(ndat.split('\n'));//separo el doc en lineas
@@ -120,34 +120,54 @@ function convetirNodos(dat){
 
     for(var j=0;j<unique.length;j++)
     {
-      var temp=[{
+      var temp={
         x: 20,
         y: 30,
         r: 10,
         label:unique[j],
-        hijos:[]
-    }];
-  
+        hijos: []
+    };
+   
       //cada vez que aparece en la lista izq, agrego como su hijo der
       for(var g=0;g<izq.length;g++)
       {
         if(izqunique[j]==izq[g])
-          temp[0].hijos.push(der[g]);        
+          temp.hijos.push(g+1);        
       }
 
       //agrego el nodo a la lista final
       nodos_convetidos.push(temp);
     }
   
-console.log("nuevo arbol");
-console.log(nodos_convetidos);
+//console.log("nuevo arbol");
+var prototipo= [{
+  x: 10,
+  y: 50,
+  r: 10,
+  label:'HTML',
+  hijos:[1,2]
+}, {
+  x: 15,
+  y: 75,
+  r: 10,
+  label:'head',
+  hijos:[]
+},{
+  x: 15,
+  y: 25,
+  r: 10,
+  label:'title',
+  hijos:[]
+}]
+//console.log(prototipo);
+//console.log(nodos_convetidos);
 return nodos_convetidos;
 }
-
+var dat;
+var ndat;
 //dat es el archivo dot cargado
 //retorna un objeto con la estructura de datos.js
 function loadTree(dat){
-  
 
   //Defaults de mi clase arbol
   var mylabel='Arbol';
@@ -159,9 +179,7 @@ function loadTree(dat){
   var mydescription='Ejemplo';
  
   //var mydata=datos2.datasets[0].data;
-  var mydata=convetirNodos(dat);
-  console.log("datos originales");
-  console.log(mydata);
+  var mydata=datos2;
   //como dat es un string con todo el contenido del archivo dot
   //primero quito todo hasta que encuentre la palabra "digraph" que marca el inicio dela estructura
   //encuentro las d's las cuales marcan los inicios de donde estaria la palabra
@@ -169,8 +187,8 @@ function loadTree(dat){
   var inicio=dat.indexOf('digraph')
   if(inicio!=-1)
   {
-    var ndat=dat.slice(inicio);//quito lo anterior a digraph
-    grafica1.config.data = datos2; 
+    ndat=dat.slice(inicio);//quito lo anterior a digraph
+
     var linea=(ndat.split('\n'));//separo el doc en lineas
     var restantes=linea.length;//numero de lineas restantes del doc
 
@@ -221,7 +239,7 @@ var grafica1 = new Chart(canvas2, {
   });
 
 function loadFile() {
-    reader.open('get', 'notas.txt', true); 
+    reader.open('get', 'notas2.txt', true); 
     reader.onreadystatechange = displayContents;
     reader.send(null);
 }
@@ -230,7 +248,14 @@ function displayContents() {
     if(reader.readyState==4) {
   //var info=loadTree(reader.responseText);
  // console.log(reader.responseText);
- grafica1.config.data = loadTree(reader.responseText);
+// grafica1.config.data = loadTree(reader.responseText);
+
+     //   console.log(grafica1.config.data.datasets[0].data);
+     //   console.log('nuevo');
+    //    console.log(convetirNodos(reader.responseText));
+        grafica1.config.data.datasets[0].data = convetirNodos(reader.responseText);
+     
+      //  console.log(grafica1.config.data.datasets[0].data);
   grafica1.update();
     }
 }

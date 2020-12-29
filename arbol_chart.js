@@ -25,8 +25,10 @@ var custom = Chart.controllers.bubble.extend({
         var t=0;  
         while(t<dataset.length)
         {
+           
             while(dataset[t].hijos[k]!=undefined)
             {
+                
                 var pos_final = meta.data[dataset[t].hijos[k]];  
                 if(dataset[t].hijos.length!=0)
                 // console.log('dibujando de',dataset[t].label);

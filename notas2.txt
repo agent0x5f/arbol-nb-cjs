@@ -1,0 +1,20 @@
+graphviz si calcula el ancho del arbol para realizar el proceso de dibujo, ademas puedo ver que el tamaño default de los rectangulos es que todos sean iguales, igual en el margen, además de que las proporciones del rectagulo es calculado a la funte de letra y ala palabra más larga en el arbol
+
+el default general(esto es al quitar la linea "rankdir = LR")produce un arbol standart
+al colocar la linea, produce la forma 2, con la raiz a la izquierda
+
+RL pone a la raiz a la derecha.
+
+revisar la documentacion del GV para implementar mas funciones
+
+por ahora are el archivo minimo posible que pueda mostrar al arbol que quiero
+las flechas tienen cabeza, implementar en el grarficador
+
+digraph{
+rankdir=LR
+edge[color=blue]
+node[style=filled,shape=rectangle,color=black,fontcolor=white]
+bgcolor=webgray
+HTML->head;
+HTML->title;
+}
