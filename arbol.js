@@ -140,6 +140,7 @@ function convetirNodos(dat){
     }
   
 //console.log("nuevo arbol");
+/*
 var prototipo= [{
   x: 10,
   y: 50,
@@ -161,6 +162,12 @@ var prototipo= [{
 }]
 //console.log(prototipo);
 //console.log(nodos_convetidos);
+*/
+
+
+//AHORA DEBO DE CALCULAR LA POSICIóN DE LOS NODOS
+//para lograr eso debo de generar un arbol con la clase arbol.js
+//y realizar los calculos de alto y ancho, y en base a eso coordenar
 return nodos_convetidos;
 }
 var dat;
