@@ -8,15 +8,15 @@ class Nodo {
 // creando nodos ejemplos
 let n0 = new Nodo('HTML');
 let n1 = new Nodo('HEAD');
-const n2 = new Nodo('TITLE');
+let n2 = new Nodo('TITLE');
 let n3 = new Nodo('BODY');
-const n4 = new Nodo('DIV');
-const n5 = new Nodo('CANVAS');
-const n6 = new Nodo('BUTTON1');
-const n7 = new Nodo('BUTTON2');
-const n8 = new Nodo('BUTTON3');
-const n9 = new Nodo('BUTTON4');
-const n10 = new Nodo('BUTTON5');
+let n4 = new Nodo('DIV');
+let n5 = new Nodo('CANVAS');
+let n6 = new Nodo('BUTTON1');
+let n7 = new Nodo('BUTTON2');
+let n8 = new Nodo('BUTTON3');
+let n9 = new Nodo('BUTTON4');
+let n10 = new Nodo('BUTTON5');
 
 // ejemplo de la pagina de linea simple original
 n0.hijos.push(n1,n3);//html es padre de head y body
@@ -142,8 +142,8 @@ function convetirNodos(dat){
     for(var j=0;j<unique.length;j++)
     {
       var temp={
-        x: 20,
-        y: 30,
+        x: 100,
+        y: 100,
         r: 10,
         label:unique[j],
         hijos: []
@@ -159,7 +159,15 @@ function convetirNodos(dat){
       //agrego el nodo a la lista final
       nodos_convetidos.push(temp);
     }
-  
+    //para estirar el canvas, agregar en el graficador una forma de borrarlo con la etiqueta nula
+    var temp={
+      x: 100,
+      y: 100,
+      r: 10,
+      label:'',
+      hijos: []
+  };
+  nodos_convetidos.push(temp);
 //console.log("nuevo arbol");
 /*
 var prototipo= [{
@@ -189,8 +197,64 @@ var prototipo= [{
 //AHORA DEBO DE CALCULAR LA POSICIóN DE LOS NODOS
 //para lograr eso debo de generar un arbol con la clase arbol.js
 //y realizar los calculos de alto y ancho, y en base a eso coordenar
+// ejemplo de la pagina de linea simple original
+//n0.hijos.push(n1,n3);//html es padre de head y body
+//n1.hijos.push(n2);//head contiene a title
+//n3.hijos.push(n4);//body contiene a div y 5 botones
+//n3.hijos.push(n6,n7,n8,n9,n10);
+//n4.hijos.push(n5);//div contiene a canvas
+//let n0 = new Nodo('HTML');
+let arbol=[];
+nodos_convetidos.forEach(element => {
+  arbol.push(new Nodo(element.label));
+  //console.log(element.label);
+});
+var ptr=0;
+nodos_convetidos.forEach(element => {
+ // console.log(element.hijos);
+  //arbol[ptr].hijos=element.hijos;
+  element.hijos.forEach(hijos => {
+    arbol[ptr].hijos.push(arbol[hijos]);
+   // arbol[ptr].hijos.shift();
+  });
+ 
+  ptr++;
+});
+
+//ahora arbol contiene a la estructura a dibujar en formato de arbol
+//puedo llamar a las funciones de alto y ancho para calcular las posiciones de dibujado
+//console.log(arbol);
+//console.log(treeWide(arbol[0]));
+//console.log(treeDepth(arbol[0]));
+
+nodos_convetidos[0].x=10;
+nodos_convetidos[0].y=50;
+ponhijos(nodos_convetidos[0],nodos_convetidos,0);
+ponhijos(nodos_convetidos[1],nodos_convetidos,1);
+ponhijos(nodos_convetidos[2],nodos_convetidos,2);
+ponhijos(nodos_convetidos[3],nodos_convetidos,3);
+console.log(nodos_convetidos);
 return nodos_convetidos;
 }
+
+function ponhijos(raiz,narbol,nivel){
+
+  if(raiz.hijos!=undefined)
+  {
+   
+  var t=raiz.hijos.length-1;//cuantos hijos tiene? 
+  var hijosdir=raiz.hijos;//cual es el indice de los hijos?
+  var margen=100/(t+1);
+  for(t;t>=0;t--)
+  {
+  narbol[hijosdir[t]].x=((nivel+1)*20);
+  narbol[hijosdir[t]].y=(t*margen)+(margen/2);
+  }
+  
+  
+  }
+}
+
 var dat;
 var ndat;
 //dat es el archivo dot cargado
@@ -267,7 +331,7 @@ var grafica1 = new Chart(canvas2, {
   });
 
 function loadFile() {
-    reader.open('get', 'notas2.txt', true); 
+    reader.open('get', 'notas.txt', true); 
     reader.onreadystatechange = displayContents;
     reader.send(null);
 }

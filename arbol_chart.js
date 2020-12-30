@@ -48,7 +48,9 @@ var custom = Chart.controllers.bubble.extend({
             var px=meta.data[e]._view.x;
             var py=meta.data[e]._view.y;
             //dibujo los nodos
-            ctx.fillRect(px-radius-margen,py-radius-margen,2*radius+margen+50,2*radius+margen);
+            if(dataset[e].label!="")//para no dibujar el que estira el canvas, ya que se estira si el nodo existe, no el importa si esta dibujado!
+              ctx.fillRect(px-radius-margen,py-radius-margen,2*radius+margen+50,2*radius+margen);
+            
             ctx.save();
             //rotulo los nodos
             ctx.font = "12px Arial";
