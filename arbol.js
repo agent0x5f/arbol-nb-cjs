@@ -63,7 +63,28 @@ function treeDepth(node) {
 }
 //console.log('Altura del arbol=',treeDepth(n0));
 
+//calcula el ancho del arbol
+//siendo el ancho la cantidad de nodos de el nivel con mas nodos
+//supone que el arbol tiene almenos a la raiz 
+function treeWide(node){
+  return treeWideAux(node,1);
+}
 
+function treeWideAux(node,resp){
+  var suma=0;
+  //la raiz tiene ancho 1, al contar a sus hijos obtengo el ancho del sig nivel
+  node.hijos.forEach(i => {
+  //  console.log("Soy "+i.dato+", Tengo "+i.hijos.length+" hijos");
+    suma=suma+i.hijos.length;
+    if(suma>resp)
+      resp=suma;
+      
+    treeWideAux(i);
+  });
+  console.log("ancho del arbol: "+resp);
+  return resp;
+}
+//treeWide(n0);
 function convetirNodos(dat){
   var nodos_convetidos=[];
 
