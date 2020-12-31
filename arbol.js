@@ -26,7 +26,7 @@ n3.hijos.push(n6,n7,n8,n9,n10);
 n4.hijos.push(n5);//div contiene a canvas
 
 function preOrderTransversal(node){
-  console.log(node.dato);
+  //console.log(node.dato);
   preOrderTransversalAux(node, 0);
 }
 
@@ -61,6 +61,21 @@ function treeDepth(node) {
       return deep + 1;
   }
 }
+
+//nodeHeight(n0,0);
+//calcula el nivel del nodo
+//que tan lejos de la raiz esta?
+//la raiz tiene nivel 0
+function nodeHeight(node,altura){
+  
+  node.hijos.forEach(element => {
+    nodeHeight(element,altura+1);
+  });
+  
+  //console.log("altura de "+node.dato+" es: "+altura);
+  return altura;
+}
+
 //console.log('Altura del arbol=',treeDepth(n0));
 
 //calcula el ancho del arbol
@@ -81,7 +96,7 @@ function treeWideAux(node,resp){
       
     treeWideAux(i);
   });
-  console.log("ancho del arbol: "+resp);
+  //console.log("ancho del arbol: "+resp);
   return resp;
 }
 //treeWide(n0);
