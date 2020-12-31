@@ -147,13 +147,18 @@ function convetirNodos(dat){
         r: 10,
         label:unique[j],
         hijos: []
-    };
+        };
+
    
       //cada vez que aparece en la lista izq, agrego como su hijo der
       for(var g=0;g<izq.length;g++)
       {
-        if(izqunique[j]==izq[g])
-          temp.hijos.push(g+1);        
+        if(unique[j]==izq[g]) {
+          //  console.log("al nodo "+unique[j]+"se add id"+(g+1));
+
+            temp.hijos.push(g + 1);
+
+        }
       }
 
       //agrego el nodo a la lista final
@@ -229,11 +234,13 @@ nodos_convetidos.forEach(element => {
 
 nodos_convetidos[0].x=10;
 nodos_convetidos[0].y=50;
-ponhijos(nodos_convetidos[0],nodos_convetidos,0);
-ponhijos(nodos_convetidos[1],nodos_convetidos,1);
-ponhijos(nodos_convetidos[2],nodos_convetidos,2);
-ponhijos(nodos_convetidos[3],nodos_convetidos,3);
-console.log(nodos_convetidos);
+var niv=0;
+nodos_convetidos.forEach(element => {
+  ponhijos(element,nodos_convetidos,niv);
+  niv++;
+});
+
+
 return nodos_convetidos;
 }
 

@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9246fc1b-2b8a-495c-b082-c595b190a00a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/arbol.js" beforeDir="false" afterPath="$PROJECT_DIR$/arbol.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +40,7 @@
       <workItem from="1609212960481" duration="848000" />
       <workItem from="1609350849937" duration="76000" />
       <workItem from="1609351010502" duration="33000" />
+      <workItem from="1609372990919" duration="1688000" />
     </task>
     <servers />
   </component>
