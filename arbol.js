@@ -235,16 +235,28 @@ nodos_convetidos.forEach(element => {
 nodos_convetidos[0].x=10;
 nodos_convetidos[0].y=50;
 var niv=0;
+var iter=0;
 nodos_convetidos.forEach(element => {
-  ponhijos(element,nodos_convetidos,niv);
+  ponhijos(element,nodos_convetidos,treeDepth(arbol[iter]),treeWide(arbol[iter])-arbol[iter].hijos.length);
   niv++;
+  iter++;
 });
 
 
 return nodos_convetidos;
 }
 
-function ponhijos(raiz,narbol,nivel){
+//me dice cuantos hijos tiene el nodo dado
+function hijos_nivel(nodo,arbol){
+  var total=0;
+  nodo.hijos.forEach(e => {
+    total++;
+  });
+
+  return total;
+}
+
+function ponhijos(raiz,narbol,nivel,hermanos){
 
   if(raiz.hijos!=undefined)
   {
@@ -254,8 +266,8 @@ function ponhijos(raiz,narbol,nivel){
   var margen=100/(t+1);
   for(t;t>=0;t--)
   {
-  narbol[hijosdir[t]].x=((nivel+1)*20);
-  narbol[hijosdir[t]].y=(t*margen)+(margen/2);
+  narbol[hijosdir[t]].x=100-((nivel)*20);
+  narbol[hijosdir[t]].y=(t*margen)+(margen/2)+hermanos*20;
   }
   
   
