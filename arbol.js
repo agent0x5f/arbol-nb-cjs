@@ -2,6 +2,7 @@ class Nodo {
     constructor(dato) {
       this.dato = dato;
       this.hijos = [];
+      this.altura = 0;
     }
   }
 
@@ -66,14 +67,15 @@ function treeDepth(node) {
 //calcula el nivel del nodo
 //que tan lejos de la raiz esta?
 //la raiz tiene nivel 0
-function nodeHeight(node,altura){
+function nodeHeight(node,h){
   
   node.hijos.forEach(element => {
-    nodeHeight(element,altura+1);
+    nodeHeight(element,h+1);
   });
-  
+  node.altura=h;
+  //console.log(node);
   //console.log("altura de "+node.dato+" es: "+altura);
-  return altura;
+  return h;
 }
 
 //console.log('Altura del arbol=',treeDepth(n0));
@@ -246,17 +248,26 @@ nodos_convetidos.forEach(element => {
 //console.log(arbol);
 //console.log(treeWide(arbol[0]));
 //console.log(treeDepth(arbol[0]));
-
+//calculando las posiciones a las que iran los nodos
 nodos_convetidos[0].x=10;
 nodos_convetidos[0].y=50;
-var niv=0;
 var iter=0;
+nodeHeight(arbol[0],0);
+
+
+//console.log(arbol);
+//console.log("su padre es: ");
+//encuentraPadre(arbol[5],arbol[0],false);
+//console.log(arbol[0].hijos[0]);
+//nodo a buscar su padre, raiz del arbol, false <--func aux para ocultarlo luego
+//console.log(encuentraPadre(arbol[0].hijos[0],arbol[0],false));
+
 nodos_convetidos.forEach(element => {
-  ponhijos(element,nodos_convetidos,treeDepth(arbol[iter]),treeWide(arbol[iter])-arbol[iter].hijos.length);
-  niv++;
+  //arbol es la estructura de datos con los nodos en los hijos
+  //el cuarto parametro son los hijos del nodo a dibujar, no los hermanos!
+  ponhijos(arbol,element,nodos_convetidos,arbol[iter].altura+1);
   iter++;
 });
-
 
 return nodos_convetidos;
 }
@@ -271,18 +282,70 @@ function hijos_nivel(nodo,arbol){
   return total;
 }
 
-function ponhijos(raiz,narbol,nivel,hermanos){
+//encuentra el padre del nodo
+//no usar en la raiz!!
+var ptr_padre;
+function encuentraPadre(nodo,r,found){
+  
+  r.hijos.forEach(element => {
+ //   console.log(element);
+ if(found==false)
+    if(element==nodo)
+    {
+    //  console.log("->nodo: "+nodo.dato);
+    //  console.log("->r: "+r.dato);
+      ptr_padre=r;
+     
+    }
+    else if(found==false)
+      encuentraPadre(nodo,element,found);
+  });
+}
 
+
+//me dice cuantos hermanos tiene el nodo dado
+//no aplica con la raiz 
+function cuantosHermanos(nodo,arbol){
+  var padre=encuentraPadre(nodo,arbol[0],false);
+ // console.log(padre.hijos.length-1);
+  return padre.hijos.length-1;
+}
+
+//le doy al padre, al og, regreso a los hermanos
+function Hermanos(padre,yo){
+  H = padre.hijos.filter(h => h!=yo);
+  //console.log(H);
+  return H;
+}
+
+
+//raiz no es la raiz del arbol, sino una lista con los nodos!
+var agujaY=10;
+var nivelX=1;
+function ponhijos(fullarbol,raiz,narbol,nivel){
+  //console.log(fullarbol[0].hijos[0]);
+ // console.log(fullarbol);
+ //console.log("Soy: "+fullarbol[5].dato);
+ //console.log(hermanos);
   if(raiz.hijos!=undefined)
   {
    
   var t=raiz.hijos.length-1;//cuantos hijos tiene? 
   var hijosdir=raiz.hijos;//cual es el indice de los hijos?
+  agujaY*=t;
   var margen=100/(t+1);
   for(t;t>=0;t--)
   {
-  narbol[hijosdir[t]].x=100-((nivel)*20);
-  narbol[hijosdir[t]].y=(t*margen)+(margen/2)+hermanos*20;
+  //  var yo=fullarbol[t];
+  //  var r=fullarbol[0];
+  //  var padre=encuentraPadre(yo,r,false);
+  //  var hermanos=Hermanos(ptr_padre,yo);
+  narbol[hijosdir[t]].x=(nivel*20)+10;
+  agujaY=agujaY+30;
+
+  narbol[hijosdir[t]].y=100-agujaY;
+ 
+    agujaY-=10;
   }
   
   
